@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
         const response = await db.get();
         res.status(200).json(response);
     } catch (error) {
-        next(sendError(500, 'Projects information could not be retrieve.', error))
+        next(sendError(500, 'Projects information could not be retrieve.', error.message))
     }
 })
 
@@ -30,7 +30,7 @@ router.get('/:id', async(req, res, next) => {
         const response = await db.get(id);
         res.status(200).json(response);
     } catch (error) {
-        next(sendError(500, 'Project information could not be retrieve.', error))
+        next(sendError(500, 'Project information could not be retrieve.', error.message))
     }
 })
 
@@ -60,7 +60,7 @@ router.post('/', async (req, res, next) => {
         const response = await db.insert(req.body);
         res.status(200).json(response);
     } catch (error) {
-        next(sendError(500, "There was an error while saving project to database.", error))
+        next(sendError(500, "There was an error while saving project to database.", error.message))
     }
 })
 
@@ -76,7 +76,7 @@ router.delete('/:id', async (req, res, next) => {
 
         res.status(200).json(response);
     } catch (error) {
-        next(sendError(500, "There was an error, this project could not be removed.", error))
+        next(sendError(500, "There was an error, this project could not be removed.", error.message))
     }
 })
 
@@ -91,7 +91,7 @@ router.put('/:id', async (req, res, next) => {
         const response = await db.update(id, req.body);
         res.status(200).json(response);
     } catch (error) {
-        next(sendError(500, "There was an error, this project could not be updated.", error))
+        next(sendError(500, "There was an error, this project could not be updated.", error.message))
     }
 })
 

@@ -18,21 +18,22 @@ router.get('/', async (req, res, next) => {
         const response = await db.get();
         res.status(200).json(response);
     } catch (error) {
-        next(sendError(500, 'Actions information could not be retrieve.', error))
+        next(sendError(500, 'Actions information could not be retrieve.', error.message))
     }
 })
 
-// //endpoint for GET with id
-// router.get('/:id', async(req, res, next) => {
-//     const id = req.params.id;
+//endpoint for GET with id
+router.get('/:id', async(req, res, next) => {
+    const id = req.params.id;
     
-//     try {
-//         const response = await db.get(id);
-//         res.status(200).json(response);
-//     } catch (error) {
-//         next(sendError(500, 'Project information could not be retrieve.', error))
-//     }
-// })
+    try {
+        const response = await db.get(id);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+        next(sendError(500, 'Action information could not be retrieve.', error.message))
+    }
+})
 
 // //endpoint for GET project actions
 // router.get('/:id/actions', async(req, res, next) => {

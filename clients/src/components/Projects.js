@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import Project from './Project';
 
 const Container = styled.div`
-    max-width: 50%;
-    width: 50%;
+    max-width: 60%;
+    width: 60%;
     margin: auto
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 `
 
 
@@ -40,7 +41,7 @@ class Projects extends Component {
                 <h2>Project List</h2>
                 <Container>
                     {this.state.projects.map(project =>
-                        <Link key={project.id} to={`/projects/${project.id}`} style={{color: 'black'}}>
+                        <Link key={project.id} to={`/projects/${project.id}`} style={{color: 'black', textDecoration: 'none'}}>
                             <Project project={project} />
                         </Link>
                     )}

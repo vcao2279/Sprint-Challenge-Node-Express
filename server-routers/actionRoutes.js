@@ -45,25 +45,22 @@ router.post('/', async (req, res, next) => {
         const response = await db.insert(req.body);
         res.status(200).json(response);
     } catch (error) {
-        next(sendError(500, "There was an error while saving action to database.", error))
+        next(sendError(500, "There was an error while saving action to database.", error.message))
     }
 })
 
-// //endpoint for DELETE
-// router.delete('/:id', async (req, res, next) => {
-//     const id = req.params.id;
+//endpoint for DELETE
+router.delete('/:id', async (req, res, next) => {
+    const id = req.params.id;
 
-//     try {
-//         const response = await db.remove(id);
-//         if (response === 0){
-//             return next(sendError(404, "There was an error deleting this project.", "There is no project for this specified ID."))
-//         }
-
-//         res.status(200).json(response);
-//     } catch (error) {
-//         next(sendError(500, "There was an error, this project could not be removed.", error))
-//     }
-// })
+    try {
+        const action = await db.get(id);
+        await db.remove(id);
+        res.status(200).json(action);
+    } catch (error) {
+        next(sendError(500, "There was an error, this action could not be removed.", error.message))
+    }
+})
 
 // //endpoint for PUT
 // router.put('/:id', async (req, res, next) => {
@@ -76,7 +73,7 @@ router.post('/', async (req, res, next) => {
 //         const response = await db.update(id, req.body);
 //         res.status(200).json(response);
 //     } catch (error) {
-//         next(sendError(500, "There was an error, this project could not be updated.", error))
+//         next(sendError(500, "There was an error, this project could not be updated.", error.message))
 //     }
 // })
 

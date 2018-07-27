@@ -65,6 +65,20 @@ router.post('/', async (req, res, next) => {
 })
 
 //endpoint for DELETE
+router.delete('/:id', async (req, res, next) => {
+    const id = req.params.id;
+
+    try {
+        const response = await db.remove(id);
+        if (response === 0){
+            return next(sendError(404, "There was an error deleting this project.", "There is no project for this specified ID."))
+        }
+
+        res.status(200).json(response);
+    } catch (error) {
+        next(sendError(500, "There was an error, this project could not be removed.", error))
+    }
+})
 
 //endpoint for UPDATE
 

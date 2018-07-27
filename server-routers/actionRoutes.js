@@ -35,35 +35,19 @@ router.get('/:id', async(req, res, next) => {
     }
 })
 
-// //endpoint for GET project actions
-// router.get('/:id/actions', async(req, res, next) => {
-//     const id = req.params.id;
-    
-//     try {
-//         const response = await db.getProjectActions(id);
-//         if (response.length===0) {
-//             return next(sendError(404, "There was an error retrieving project information.", "There is no project for this specified ID."))
-//         }
+//endpoint for POST 
+router.post('/', async (req, res, next) => {
+    if (!(req.body.notes && req.body.description && req.body.project_id)) {
+        return next(sendError(400, "There was an error while saving action to database.", "Please provide project ID, notes, and description of action."))
+    }
 
-//         res.status(200).json(response);
-//     } catch (error) {
-//         next(sendError(500, "Project's actions information could not be retrieve.", error.message))
-//     }
-// })
-
-// //endpoint for POST 
-// router.post('/', async (req, res, next) => {
-//     if (!(req.body.name && req.body.description)) {
-//         return next(sendError(400, "There was an error while saving project to database.", "Please provide both name and description of project."))
-//     }
-
-//     try {
-//         const response = await db.insert(req.body);
-//         res.status(200).json(response);
-//     } catch (error) {
-//         next(sendError(500, "There was an error while saving project to database.", error))
-//     }
-// })
+    try {
+        const response = await db.insert(req.body);
+        res.status(200).json(response);
+    } catch (error) {
+        next(sendError(500, "There was an error while saving action to database.", error))
+    }
+})
 
 // //endpoint for DELETE
 // router.delete('/:id', async (req, res, next) => {

@@ -80,6 +80,19 @@ router.delete('/:id', async (req, res, next) => {
     }
 })
 
-//endpoint for UPDATE
+//endpoint for PUT
+router.put('/:id', async (req, res, next) => {
+    const id = req.params.id;
+    if ((!req.body.name && !req.body.description)) {
+        return next(sendError(400, "There was an error while updating project.", "Please provide information of project to be updated."))
+    } 
+
+    try {
+        const response = await db.update(id, req.body);
+        res.status(200).json(response);
+    } catch (error) {
+        next(sendError(500, "There was an error, this project could not be updated.", error))
+    }
+})
 
 module.exports = router;

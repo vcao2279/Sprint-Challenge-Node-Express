@@ -17,6 +17,19 @@ const Container = styled.div`
     box-shadow: 1px 3px 10px;
     margin: 20px auto;
 `
+
+const Header = styled.span`
+    font-weight: bold;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 20px;
+`
+
+const Description = styled.span`
+    font-size: 15px;
+    font-style: italic;
+    font-family: 'Helvetica', sans-serif;
+`
+
 class ProjectActions extends React.Component {
     constructor(props) {
         super(props);
@@ -48,9 +61,13 @@ class ProjectActions extends React.Component {
                 {this.state.actions.map(action => {
                     return (
                         <Container key={action.id}>
-                            {action.description}
+                            <Header>
+                                {action.description}
+                            </Header>
                             <hr />
-                            {action.notes}
+                            <Description>
+                                {action.notes}
+                            </Description>
                         </Container>
                     )
                 })}

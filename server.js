@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const projectRoutes = require('./server-routers/projectRoutes');
+const actionRoutes = require('./server-routers/actionRoutes');
 
 //create server
 server = express();
@@ -13,6 +14,7 @@ server.use(helmet());
 
 //Routes
 server.use('/api/projects', projectRoutes);
+server.use('/api/actions', actionRoutes);
 
 //Error handler
 server.use((err, req, res, next) => {

@@ -12,7 +12,7 @@ const ProjectsContainer = styled.div`
 `
 const Container = styled.div`
     width: 500px;
-    border: 1px solid;
+    border: 1px solid #D5D8C5;
     padding: 10px;
     box-shadow: 1px 3px 10px;
     margin: 20px auto;
@@ -22,12 +22,14 @@ const Header = styled.span`
     font-weight: bold;
     font-family: 'Helvetica', sans-serif;
     font-size: 20px;
+    color: #949FD3;
 `
 
 const Description = styled.span`
     font-size: 15px;
     font-style: italic;
     font-family: 'Helvetica', sans-serif;
+    color: #566047;
 `
 
 class ProjectActions extends React.Component {
@@ -57,7 +59,7 @@ class ProjectActions extends React.Component {
         console.log(this.state.project.actions);
         return (
             <ProjectsContainer>
-                <h3>{this.state.project}</h3>
+                <h1 style={{color: '#E2CFC8'}}>{this.state.project}</h1>
                 {this.state.actions.map(action => {
                     return (
                         <Container key={action.id}>

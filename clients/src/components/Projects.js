@@ -38,7 +38,7 @@ class Projects extends Component {
     render() { 
         return (
             <div>
-                <h2>Project List</h2>
+                <h1 style={{color: '#E2CFC8'}}>Project List</h1>
                 <Container>
                     {this.state.projects.map(project =>
                         <Link key={project.id} to={`/projects/${project.id}`} style={{color: 'black', textDecoration: 'none'}}>

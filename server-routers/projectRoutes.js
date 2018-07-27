@@ -41,7 +41,7 @@ router.get('/:id/actions', async(req, res, next) => {
     try {
         const response = await db.getProjectActions(id);
         if (response.length===0) {
-            return next(sendError(404, "Project's actions information could not be retrieve.", "There is no project for this specified ID."))
+            return next(sendError(404, "There was an error retrieving project information.", "There is no project for this specified ID."))
         }
 
         res.status(200).json(response);
@@ -51,6 +51,18 @@ router.get('/:id/actions', async(req, res, next) => {
 })
 
 //endpoint for POST 
+router.post('/', async (req, res, next) => {
+    if (!(req.body.name && req.body.description)) {
+        return next(sendError(400, "There was an error while saving project to database.", "Please provide both name and description of project."))
+    }
+
+    try {
+        const response = await db.insert(req.body);
+        res.status(200).json(response);
+    } catch (error) {
+        next(sendError(500, "There was an error while saving project to database.", error))
+    }
+})
 
 //endpoint for DELETE
 

@@ -11,6 +11,7 @@ server = express();
 //middleware
 server.use(express.json());
 server.use(helmet());
+server.use(cors({ origin: 'http://localhost:3000'}));
 
 //Routes
 server.use('/api/projects', projectRoutes);

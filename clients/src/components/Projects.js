@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import Project from './Project';
 
 const Container = styled.div`
@@ -13,14 +12,17 @@ const Container = styled.div`
     justify-content: space-around;
     align-items: center;
 `
-
+const Header = styled.h1`
+    margin: 0;
+    padding-top: 20px;
+`
 
 class Projects extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             projects: []
-         }
+        }
     }
 
     componentDidMount() {
@@ -35,20 +37,18 @@ class Projects extends Component {
     }
 
 
-    render() { 
+    render() {
         return (
             <div>
-                <h1 style={{color: '#E2CFC8'}}>Project List</h1>
+                <Header>Project Link</Header>
                 <Container>
                     {this.state.projects.map(project =>
-                        <Link key={project.id} to={`/projects/${project.id}`} style={{color: 'black', textDecoration: 'none'}}>
-                            <Project project={project} />
-                        </Link>
+                        <Project project={project} key={project.id}/>
                     )}
                 </Container>
             </div>
         );
     }
 }
- 
+
 export default Projects;
